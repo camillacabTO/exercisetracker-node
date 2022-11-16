@@ -36,12 +36,14 @@ app.post('/api/users', async (req, res) => {
 app.post('/api/users/:_id/exercises', async (req, res) => {
   const id = mongoose.Types.ObjectId(req.params._id.trim());
   console.log('body', req.body);
+
   const exercise = new Exercise({
     user: id,
     description: req.body.description,
     duration: parseInt(req.body.duration),
-    date: req.body.date,
+    date: new Date(req.body.date).getTime(),
   });
+
   const ex = await exercise.save();
 
   const savedExercise = await Exercise.findOne({ _id: ex._id })
