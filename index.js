@@ -40,8 +40,10 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
   const exercise = new Exercise({
     user: id,
     description: req.body.description,
-    duration: parseInt(req.body.duration),
-    date: new Date(req.body.date).getTime(),
+    duration: Number(req.body.duration),
+    date: req.body.date
+      ? new Date(req.body.date).toDateString()
+      : new Date().toDateString(),
   });
 
   const ex = await exercise.save();
@@ -63,20 +65,24 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
 });
 
 app.get('/api/users/:_id/logs', async (req, res) => {
-  //set default values for from and to query parameters
-  req.query.from = req.query.from ? req.query.from : 0;
-  req.query.to = req.query.to ? req.query.to : new Date().getTime();
-  // convert to timestamp format
-  const from = new Date(req.query.from).getTime();
-  const to = new Date(req.query.to).getTime();
-
   const user = await User.findById(req.params._id);
-  let exerciseData = await Exercise.where('user', req.params._id)
-    .where('date')
-    .gte(from)
-    .lte(to)
-    .limit(req.query.limit)
-    .exec();
+  const limit = Number(req.query.limit) || 0;
+  const from = req.query.from || new Date(0);
+  const to = req.query.to || new Date(Date.now());
+
+  let exerciseData = await Exercise.find({
+    user: req.params._id,
+    date: { $gte: from, $lte: to },
+  })
+    .select('-_id -userid -__v')
+    .limit(limit);
+
+  // let exerciseData = await Exercise.where("user", user._id)
+  //   .where("date")
+  //   .gte(from)
+  //   .lte(to)
+  //   .limit(limit)
+  //   .exec();
 
   //convert date to string
   exerciseData = exerciseData.map((ex) => ({
