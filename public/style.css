@@ -5,13 +5,10 @@
 body {
   font-family: 'Roboto', sans-serif;
   color: #000;
-  background-color: #DBF0E9;
+  background-color: #fff;
   font-size: 110%;
   text-align: center;
-  background-image: url(background.svg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  padding: 1.6rem;
+  padding: 30px;
 }
 
 .forms-container {
@@ -19,11 +16,10 @@ body {
   justify-items: center;
   align-items: center;
   flex-wrap: wrap;
-  /* flex-direction: column; */
 }
 
 h1, h3 {
-  font-weight: 700;
+  font-weight: 800;
 }
 
 p {
@@ -35,12 +31,13 @@ form, .instructions{
   padding: 15px 25px;
   background-color: #00CDE1;
   width: 40%;
+  min-width: 350px;
   border-radius: 5px;
   min-height: 20rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  box-shadow: 6px 6px 45px 3px rgba(0,0,0,0.44);
+  box-shadow: 5px 5px 20px rgba(0,0,0,0.5);
 
   /* gap: 1rem; */
   /* flex: 1 1 auto; */
