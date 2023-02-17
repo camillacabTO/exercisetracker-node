@@ -4,23 +4,40 @@
   <head>
     <title>Exercise Tracker</title>
     <link rel="shortcut icon" href="" type="image/x-icon" />
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&family=Roboto:wght@400;500;700;900&display=swap"
+      rel="stylesheet">
     <link href="style.css" rel="stylesheet" type="text/css" />
   </head>
 
   <body>
-    <div class="container">
-      <h1>Exercise tracker</h1>
+    <h1>Exercise tracker</h1>
+    <div class="forms-container">
       <form action="/api/users" method="post">
-        <h3>Create a New User</h3>
+        <h3>Create an Account:</h3>
         <p><code>POST /api/users</code></p>
         <input id="uname" type="text" name="username" placeholder="username" />
         <input type="submit" value="Submit" />
       </form>
+      <div class="instructions">
+        <h3>Get Exercises Log:</h3>
+        <p>
+          <strong>Send a GET request to:</strong>
+          <code>/api/users/:username/logs?[from][&amp;to][&amp;limit]</code>
+        </p>
+        <p>
+          <strong>Example: </strong>
+          <code>GET /api/users/camillacab/logs?from=2022-01-01&to=2022-12-31&limit=2</code>
+        </p>
+        <p><strong>[ ]</strong> = optional;
+          <strong>from, to</strong> = dates (yyyy-mm-dd); <strong>limit</strong> = number
+        </p>
+      </div>
       <form id="exercise-form" method="post">
-        <h3>Add an Exercise:</h3>
-        <p><code>POST</code></p>
-        <p><code>/api/users/username/exercise</code></p>
+        <h3>Enter an Exercise:</h3>
+        <p><code>POTS /api/users/username/exercise</code></p>
         <input id="username" type="text" name="username" placeholder="username" />
         <input id="desc" type="text" name="description" placeholder="description*" />
         <input id="dur" type="text" name="duration" placeholder="duration* (mins.)" />
@@ -28,17 +45,9 @@
         <p id="message"></p>
         <input type="submit" value="Submit" />
       </form>
-      <p>
-        <strong>GET user's exercise log: </strong>
-        <code>GET /api/users/:username/logs?[from][&amp;to][&amp;limit]</code>
-      </p>
-      <p>
-        <strong>Example: </strong>
-        <code>GET /api/users/camillacab/logs?from=2022-01-01&to=2022-12-31&limit=2</code>
-      </p>
-      <p><strong>[ ]</strong> = optional</p>
-      <p><strong>from, to</strong> = dates (yyyy-mm-dd); <strong>limit</strong> = number</p>
+
     </div>
+
     <script>
       const exerciseForm = document.getElementById("exercise-form")
 
