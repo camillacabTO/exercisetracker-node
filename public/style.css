@@ -9,6 +9,9 @@ body {
   font-size: 110%;
   text-align: center;
   padding: 30px;
+  background-image: url('background2.svg');
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .forms-container {
